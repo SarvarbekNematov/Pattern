@@ -1,34 +1,33 @@
-# 🧩 Design Pattern: Command Pattern
+## Design Pattern
+# Command Pattern
 
-With the **Command Pattern**, we can decouple objects that execute a certain task from the object that calls the method.
-
-## 🍱 Real-World Analogy
+With the **Command Pattern**, we can *decouple* objects that execute a certain task from the object that calls the method.
 
 Let’s say we have an online food delivery platform. Users can place, track, and cancel orders.
 
 ```javascript
-class OrderManager {
+class OrderManager() {
   constructor() {
-    this.orders = [];
+    this.orders = []
   }
 
   placeOrder(order, id) {
-    this.orders.push(id);
+    this.orders.push(id)
     return `You have successfully ordered ${order} (${id})`;
   }
 
   trackOrder(id) {
-    return `Your order ${id} will arrive in 20 minutes.`;
+    return `Your order ${id} will arrive in 20 minutes.`
   }
 
   cancelOrder(id) {
-    this.orders = this.orders.filter(order => order.id !== id);
-    return `You have canceled your order ${id}`;
+    this.orders = this.orders.filter(order => order.id !== id)
+    return `You have canceled your order ${id}`
   }
 }
 ```
 
-On the `OrderManager` class, we have access to the `placeOrder`, `trackOrder` and `cancelOrder` methods. It would be totally valid JavaScript to just use these methods directly!
+On the **`OrderManager`** class, we have access to the **`placeOrder`**, **`trackOrder`** and **`cancelOrder`** methods. It would be totally valid JavaScript to just use these methods directly!
 
 ```javascript
 const manager = new OrderManager();
@@ -38,15 +37,16 @@ manager.trackOrder("1234");
 manager.cancelOrder("1234");
 ```
 
-However, there are downsides to invoking the methods directly on the manager instance. It could happen that we decide to rename certain methods later on, or the functionality of the methods change.
+However, there are downsides to invoking the methods directly on the **`manager`** instance. It could happen that we decide to rename certain methods later on, or the functionality of the methods change.
 
-Say that instead of calling it `placeOrder`, we now rename it to `addOrder`! This would mean that we would have to make sure that we don’t call the `placeOrder` method anywhere in our codebase, which could be very tricky in larger applications.
-
-Instead, we want to decouple the methods from the manager object, and create separate command functions for each command!
+Say that instead of calling it **`placeOrder`**, we now rename it to **`addOrder`**! This would mean that we would have to make sure that we don’t call the **`placeOrder`** method anywhere in our codebase, which could be very tricky in larger applications.
+Instead, we want to decouple the methods from the **`manager`** object, and create separate command functions for each command!
 
 ## 🔁 Refactoring with an `execute` method
 
-Let’s refactor the `OrderManager` class: instead of having the `placeOrder`, `cancelOrder` and `trackOrder` methods, it will have one single method: `execute`.
+Let’s refactor the **`OrderManager`** class: instead of having the **`placeOrder`**, **`cancelOrder`** and **`trackOrder`** methods, it will have one single method: **`execute`**.This method will execute any command it’s given.
+
+Each command should have access to the **`orders`** of the manager, which we’ll pass as its first argument.
 
 ```javascript
 class OrderManager {
@@ -60,13 +60,11 @@ class OrderManager {
 }
 ```
 
-## 🧱 Command Definitions
+We need to create three **`Command`** s for the order manager:
 
-We need to create three Commands for the order manager:
-
-- `PlaceOrderCommand`
-- `CancelOrderCommand`
-- `TrackOrderCommand`
+- **`PlaceOrderCommand`**
+- **`CancelOrderCommand`**
+- **`TrackOrderCommand`**
 
 ```javascript
 class Command {
@@ -94,9 +92,7 @@ function TrackOrderCommand(id) {
 }
 ```
 
-Perfect! Instead of having the methods directly coupled to the `OrderManager` instance, they’re now separate, decoupled functions that we can invoke through the `execute` method.
-
-## 🧪 Full Example
+Perfect! Instead of having the methods directly coupled to the **`OrderManager`** instance, they’re now separate, decoupled functions that we can invoke through the **`execute`** method that’s available on the **`OrderManager`**.
 
 ```javascript
 class OrderManager {
@@ -142,17 +138,15 @@ manager.execute(new TrackOrderCommand("1234"));
 manager.execute(new CancelOrderCommand("1234"));
 ```
 
-## ✅ Pros
+## Pros
 
-- Decouples methods from the object that executes the operation.
-- Useful for commands that should be queued, stored, or executed at specific times.
+The command pattern allows us to decouple methods from the object that executes the operation. It gives you more control if you’re dealing with commands that have a certain lifespan, or commands that should be queued and executed at specific times.
 
-## ❌ Cons
+## Cons
 
-- Limited use cases.
-- May introduce unnecessary boilerplate in simpler applications.
+The use cases for the command pattern are quite limited, and often adds unnecessary boilerplate to an application.
 
-## 📚 References
+## References
 
 - [Command Design Pattern - SourceMaking](https://sourcemaking.com/design_patterns/command)
 - [Command Pattern - Refactoring Guru](https://refactoring.guru/design-patterns/command)
