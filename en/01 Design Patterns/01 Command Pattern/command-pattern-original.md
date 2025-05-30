@@ -42,7 +42,6 @@ However, there are downsides to invoking the methods directly on the **`manager`
 Say that instead of calling it **`placeOrder`**, we now rename it to **`addOrder`**! This would mean that we would have to make sure that we don’t call the **`placeOrder`** method anywhere in our codebase, which could be very tricky in larger applications.
 Instead, we want to decouple the methods from the **`manager`** object, and create separate command functions for each command!
 
-## 🔁 Refactoring with an `execute` method
 
 Let’s refactor the **`OrderManager`** class: instead of having the **`placeOrder`**, **`cancelOrder`** and **`trackOrder`** methods, it will have one single method: **`execute`**.This method will execute any command it’s given.
 
@@ -148,6 +147,6 @@ The use cases for the command pattern are quite limited, and often adds unnecess
 
 ## References
 
-- [Command Design Pattern - SourceMaking](https://sourcemaking.com/design_patterns/command)
-- [Command Pattern - Refactoring Guru](https://refactoring.guru/design-patterns/command)
-- [Command Pattern - Carlos Caballero](https://www.carloscaballero.io/command-pattern/)
+- [Design Pattern](https://sourcemaking.com/design_patterns/command) - SourceMaking
+- [Pattern](https://refactoring.guru/design-patterns/command) - Refactoring Guru
+- [Pattern](https://www.carloscaballero.io/command-pattern/) - Carlos Caballero
