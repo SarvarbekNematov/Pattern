@@ -57,7 +57,7 @@ We want to keep track of the **user interaction** with the application. Whenever
 Essentially, what we want to do is the following:
 
 <video width="100%" controls>
-  <source src="../../../imgs/01DesignPatterns/02ObserverPattern/01Video.webm" type="video/webm">
+  <source src="../../../imgs/01DesignPatterns/02ObserverPattern/01Video.webm" type="video/webm" alt="Observer Pattern Video">
 </video>
 
 Whenever the user invokes the **`handleClick`** or **`handleToggle`** function, the functions invoke the **`notify`** method on the observer. The **`notify`** method notifies all subscribers with the data that was passed by the **`handleClick`** or **`handleToggle`** function!
