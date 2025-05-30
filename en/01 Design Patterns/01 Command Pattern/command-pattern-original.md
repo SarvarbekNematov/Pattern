@@ -1,5 +1,5 @@
-## Design Pattern
-# Command Pattern
+<h4 style='border-bottom: none'>Design Pattern</h4>
+<h1 style='border-bottom: none'>Command Pattern</h1>
 
 With the **Command Pattern**, we can *decouple* objects that execute a certain task from the object that calls the method.
 
@@ -136,17 +136,20 @@ manager.execute(new PlaceOrderCommand("Pad Thai", "1234"));
 manager.execute(new TrackOrderCommand("1234"));
 manager.execute(new CancelOrderCommand("1234"));
 ```
+<br>
+<hr>
 
-## Pros
+<h2 style='border-bottom: none'>Pros</h2>
 
 The command pattern allows us to decouple methods from the object that executes the operation. It gives you more control if you’re dealing with commands that have a certain lifespan, or commands that should be queued and executed at specific times.
 
-## Cons
+<h2 style='border-bottom: none'>Cons</h2>
 
 The use cases for the command pattern are quite limited, and often adds unnecessary boilerplate to an application.
+<br>
+<hr>  
 
-## References
-## Pros
+<h2 style='border-bottom: none'>References</h2>
 
 - [Design Pattern](https://sourcemaking.com/design_patterns/command) - SourceMaking
 - [Pattern](https://refactoring.guru/design-patterns/command) - Refactoring Guru
