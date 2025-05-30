@@ -2,11 +2,11 @@
 
 **Manba:** [patterns.dev/vanilla/command-pattern](https://www.patterns.dev/vanilla/command-pattern/)
 
-## 🧠 Kirish
+## Kirish
 
 Command Pattern yordamida bajariladigan amallarni ularni chaqiruvchi obyektlardan ajratish mumkin. Bu, ayniqsa, buyruqlarni boshqarish, navbatga qo‘yish yoki keyinchalik bajarish kerak bo‘lganda foydalidir.
 
-## 🍜 Misol: Onlayn ovqat yetkazib berish platformasi
+## Misol: Onlayn ovqat yetkazib berish platformasi
 
 Foydalanuvchilar buyurtma berish, kuzatish va bekor qilish imkoniyatiga ega.
 
@@ -44,7 +44,7 @@ manager.cancelOrder("1234");
 
 Ammo, metodlarni to‘g‘ridan-to‘g‘ri chaqirish ba'zi kamchiliklarga olib kelishi mumkin, masalan, metod nomlarini o‘zgartirish zarurati bo‘lsa, kod bazasida ko‘plab o‘zgarishlar qilish kerak bo‘ladi. Buning o‘rniga, metodlarni ajratib, har bir buyruq uchun alohida funksiyalar yaratish mumkin.
 
-## 🔄 Refaktorlashtirish: `execute` metodi
+## Refaktorlashtirish: `execute` metodi
 
 `OrderManager` klassini qayta yozamiz: `placeOrder`, `cancelOrder` va `trackOrder` metodlari o‘rniga yagona `execute` metodi bo‘ladi.
 
@@ -60,7 +60,7 @@ class OrderManager {
 }
 ```
 
-## 🧩 Buyruqlarni yaratish
+## Buyruqlarni yaratish
 
 Uchta buyruq yaratamiz:
 
@@ -94,7 +94,7 @@ function TrackOrderCommand(id) {
 }
 ```
 
-## 🚀 Foydalanish
+## Foydalanish
 
 ```javascript
 const manager = new OrderManager();
@@ -104,16 +104,16 @@ manager.execute(new TrackOrderCommand("1234"));
 manager.execute(new CancelOrderCommand("1234"));
 ```
 
-## ✅ Afzalliklari
+## Afzalliklari
 
 - Metodlarni chaqiruvchi obyektlardan ajratish imkonini beradi.
 - Buyruqlarni boshqarish, navbatga qo‘yish yoki keyinchalik bajarish osonlashadi.
 
-## ❌ Kamchiliklari
+## Kamchiliklari
 
 - Kichik loyihalarda qo‘llash ortiqcha murakkablik keltirib chiqarishi mumkin.
 
-## 🔗 Manbalar
+## Manbalar
 
 - [Command Design Pattern - SourceMaking](https://sourcemaking.com/design_patterns/command)
 - [Command Pattern - Refactoring Guru](https://refactoring.guru/design-patterns/command)
