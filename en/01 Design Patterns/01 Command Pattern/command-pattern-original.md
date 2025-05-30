@@ -146,6 +146,7 @@ The command pattern allows us to decouple methods from the object that executes 
 The use cases for the command pattern are quite limited, and often adds unnecessary boilerplate to an application.
 
 ## References
+## Pros
 
 - [Design Pattern](https://sourcemaking.com/design_patterns/command) - SourceMaking
 - [Pattern](https://refactoring.guru/design-patterns/command) - Refactoring Guru
