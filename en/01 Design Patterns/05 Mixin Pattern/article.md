@@ -44,13 +44,13 @@ Object.assign(Dog.prototype, dogFunctionality);
 
 Let’s create our first pet, **`pet1`**, called Daisy. As we just added the **`dogFunctionality`** mixin to the **`Dog`**'s prototype, Daisy should be able to walk, wag her tail, and play!
 
-```javascript
+````javascript
 const pet1 = new Dog("Daisy");
 
 pet1.name; // Daisy
 pet1.bark(); // Woof!
 pet1.play(); // Playing!
-```
+````
 
 Perfect! Mixins make it easy for us to add custom functionality to classes or objects without using inheritance.
 
