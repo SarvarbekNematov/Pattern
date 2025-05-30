@@ -151,6 +151,6 @@ The use cases for the command pattern are quite limited, and often adds unnecess
 
 <h2 style='border-bottom: none'>References</h2>
 
-- [Design Pattern](https://sourcemaking.com/design_patterns/command) - SourceMaking
-- [Pattern](https://refactoring.guru/design-patterns/command) - Refactoring Guru
-- [Pattern](https://www.carloscaballero.io/command-pattern/) - Carlos Caballero
+- [**Design Pattern**](https://sourcemaking.com/design_patterns/command) - SourceMaking
+- [**Pattern**](https://refactoring.guru/design-patterns/command) - Refactoring Guru
+- [**Pattern**](https://www.carloscaballero.io/command-pattern/) - Carlos Caballero
