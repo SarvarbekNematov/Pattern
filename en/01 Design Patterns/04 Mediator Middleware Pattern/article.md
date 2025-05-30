@@ -9,13 +9,13 @@ You can compare this pattern to the relationship between an air traffic controll
 Although we’re hopefully not controlling airplanes in JavaScript, we often have to deal with multidirectional data between objects. The communication between the components can get rather confusing if there is a large number of components.
 
 <br>
-<img src="../../../imgs/01DesignPatterns/01MediatorPattern/01.webp" alt="Mediator Pattern" width="500">
+<img src="../../../imgs/01DesignPatterns/01MediatorPattern/01.webp" alt="Mediator Pattern" width="85%">
 
 <br>
 Instead of letting every objects talk directly to the other objects, resulting in a many-to-many relationship, the object’s requests get handled by the mediator. The mediator processes this request, and sends it forward to where it needs to be.
 
 <br>
-<img src="../../../imgs/01DesignPatterns/01MediatorPattern/02.webp" alt="Mediator Pattern" width="500">
+<img src="../../../imgs/01DesignPatterns/01MediatorPattern/02.webp" alt="Mediator Pattern" width="85%">
 
 <br>
 A good use case for the mediator pattern is a chatroom! The users within the chatroom won’t talk to each other directly. Instead, the chatroom serves as the mediator between the users.
@@ -103,7 +103,7 @@ app.use("/", (req, res, next) => {
 The **`next`** method calls the next callback in the request-response cycle. We’d effectively be creating a chain of middleware functions that sit between the request and the response, or vice versa.
 
 <br>
-<img src="../../../imgs/01DesignPatterns/01MediatorPattern/03.webp" alt="Middleware Pattern" width="500">
+<img src="../../../imgs/01DesignPatterns/01MediatorPattern/03.webp" alt="Middleware Pattern" width="85%">
 
 <br>
 Let’s add another middleware function that checks whether the **`test-header`** was added correctly. The change added by the previous middleware function will be visible throughout the chain.
