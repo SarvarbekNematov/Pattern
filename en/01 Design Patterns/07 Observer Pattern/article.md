@@ -245,8 +245,6 @@ Using the observer pattern is a great way to enforce separation of concerns and 
 
 <hr>
 
-<br>
-
 ### Cons
 
 If an observer becomes too complex, it may cause performance issues when notifying all subscribers.
