@@ -10,9 +10,9 @@ The [View Transitions API](https://developer.chrome.com/docs/web-platform/view-t
 
 [![Image alt text](https://res.cloudinary.com/ddxwdqwkr/video/upload/v1678492898/patterns.dev/astro-movies-2023.jpg)](https://res.cloudinary.com/ddxwdqwkr/video/upload/v1678492898/patterns.dev/astro-movies-2023.mp4)
 
-The JavaScript API centers around `document.startViewTransition(callback)`, where `callback` is a function that typically updates the DOM to the new state.
+The JavaScript API centers around **`document.startViewTransition(callback)`**, where **`callback`** is a function that typically updates the DOM to the new state.
 
-Let’s take toggling a `<details>` element as a simple example:
+Let’s take toggling a **`<details>`** element as a simple example:
 
 ```
 if (document.startViewTransition) {
@@ -27,13 +27,13 @@ if (document.startViewTransition) {
 }
 ```
 
-`document.startViewTransition` takes a screenshot of the current DOM before calling the callback. Here, our callback just toggles the `open` attribute. Once complete, the browser can then transition between the initial screenshot and the new version.
+**`document.startViewTransition`** takes a screenshot of the current DOM before calling the callback. Here, our callback just toggles the **`open`** attribute. Once complete, the browser can then transition between the initial screenshot and the new version.
 
 [![Image alt text](https://res.cloudinary.com/ddxwdqwkr/video/upload/v1678488008/patterns.dev/toggle-demo.jpg)](https://res.cloudinary.com/ddxwdqwkr/video/upload/v1678488008/patterns.dev/toggle-demo.mp4)
 
 - - -
 
-These old and new versions are presented as pseudo elements and can be referenced in CSS with `::view-transition-old(root)` and `::view-transition-new(root)` respectively. For example, to emphasize the transition, we can lengthen the `animation-duration` like so:
+These old and new versions are presented as pseudo elements and can be referenced in CSS with **`::view-transition-old(root)`** and **`::view-transition-new(root)`** respectively. For example, to emphasize the transition, we can lengthen the **`animation-duration`** like so:
 
 ```
 ::view-transition-old(root),
@@ -46,17 +46,17 @@ These old and new versions are presented as pseudo elements and can be reference
 
 - - -
 
-View transitions are also capable of animating multiple changes with more advanced animations that go beyond the default crossfade. By giving specific elements a CSS `view-transition-name`, and a `containment` of `layout` or `paint`, the API gives developers granular control over how the elements transition, including their width, height, and position. These advanced transitions can really help communicate the flow from one page to the next.
+View transitions are also capable of animating multiple changes with more advanced animations that go beyond the default crossfade. By giving specific elements a CSS **`view-transition-name`**, and a **`containment`** of **`layout`** or **`paint`**, the API gives developers granular control over how the elements transition, including their width, height, and position. These advanced transitions can really help communicate the flow from one page to the next.
 
 Take this [photo gallery](https://charming-crumble-af45ba.netlify.app/) as an example:
 
 [![Image alt text](https://res.cloudinary.com/ddxwdqwkr/video/upload/v1678488017/patterns.dev/photo-gallery-demo.jpg)](https://res.cloudinary.com/ddxwdqwkr/video/upload/v1678488017/patterns.dev/photo-gallery-demo.mp4)
 
-The most obvious transition as the size and position of the photo, which is automatically achieved when the `<img>` element on each page is given the same unique `view-transition-name`, and a CSS `containment` value of `layout`. In this demo, the `view-transition-name`s are hard-coded in the style attributes, but you could also add them dynamically (e.g. in a `onclick` handler), as long as they’re unique to the page and added before the transition is started.
+The most obvious transition as the size and position of the photo, which is automatically achieved when the `<img>` element on each page is given the same unique **`view-transition-name`**, and a CSS **`containment`** value of **`layout`**. In this demo, the **`view-transition-name`**s are hard-coded in the style attributes, but you could also add them dynamically (e.g. in a **`onclick`** handler), as long as they’re unique to the page and added before the transition is started.
 
 The photo details beneath require a little more styling. If you notice, there’s a stagerred slide-in/slide-out animation for each line of the details.
 
-We give each line element has it’s own `view-transition-name`:
+We give each line element has it’s own **`view-transition-name`**:
 
 ```
 figcaption h2 {
@@ -73,7 +73,7 @@ figcaption dl {
 }
 ```
 
-This generates _transition groups_ for each area, which are just like the new/old screenshots mentioned earlier, but only cover an area of the page rather than the whole document. And just as the whole document transition elements could be targeted with `::view-transition-old(root)` and `::view-transition-new(root)`, these transition groups can be targeted with `::view-transition-old(NAME)` and `::view-transition-new(NAME)`. Note that the details text is not present on the photo grid page, therefore when transitioning from the grid to the photo page, there’ll only by a `::view-transition-new(NAME)`, _not_ a `::view-transition-old(NAME)`, and vice versa when navigating the other way. So we can target these cases using the `:only-child` pseudo class and customize the animation. For the `photo-heading` group:
+This generates _transition groups_ for each area, which are just like the new/old screenshots mentioned earlier, but only cover an area of the page rather than the whole document. And just as the whole document transition elements could be targeted with **`::view-transition-old(root)`** and **`::view-transition-new(root)`**, these transition groups can be targeted with **`::view-transition-old(NAME)`** and **`::view-transition-new(NAME)`**. Note that the details text is not present on the photo grid page, therefore when transitioning from the grid to the photo page, there’ll only by a **`::view-transition-new(NAME)`**, _not_ a **`::view-transition-old(NAME)`**, and vice versa when navigating the other way. So we can target these cases using the **`:only-child`** pseudo class and customize the animation. For the **`photo-heading`** group:
 
 ```
 /* Enter */
@@ -99,9 +99,9 @@ A typical page navigation looks something like:
 
 To apply a view transition in this flow, there are a couple of considerations.
 
-First, is minimizing the time that the screen is in a frozen state. You may have noticed from the slow transition example above, that once a view transition has started, the DOM will be not interactive until the callback completes. If we start the transition when the user clicks the link, they could be waiting a while with a frozen UI. To minimize this annoyance, ideally `document.startViewTransition` should be called after the request has completed. That way, we’re ready for the change, and the DOM can be updated as swiftly as possible.
+First, is minimizing the time that the screen is in a frozen state. You may have noticed from the slow transition example above, that once a view transition has started, the DOM will be not interactive until the callback completes. If we start the transition when the user clicks the link, they could be waiting a while with a frozen UI. To minimize this annoyance, ideally **`document.startViewTransition`** should be called after the request has completed. That way, we’re ready for the change, and the DOM can be updated as swiftly as possible.
 
-Second, we need to be sure the initial DOM screenshot has been captured before we update the DOM. When working with page navigations in third-party frameworks, we don’t have full control over the rendering process; the DOM is automatically updated when the response is received. Therefore we don’t have a standalone function we can pass to `document.startViewTransition` that will tidily perform the DOM update. We may need to intercept, pause, and resume rendering to give the illusion we have a single function that updates the DOM.
+Second, we need to be sure the initial DOM screenshot has been captured before we update the DOM. When working with page navigations in third-party frameworks, we don’t have full control over the rendering process; the DOM is automatically updated when the response is received. Therefore we don’t have a standalone function we can pass to **`document.startViewTransition`** that will tidily perform the DOM update. We may need to intercept, pause, and resume rendering to give the illusion we have a single function that updates the DOM.
 
 Nicely enough, if we return a promise from our DOM update callback, the view transition API will wait for its resolution before performing the animation. We can use this feature to handle the timing issues mentioned above.
 
@@ -109,9 +109,9 @@ Nicely enough, if we return a promise from our DOM update callback, the view tra
 
 To tackle the issues above, we’ll create a React class component as it’s easier to explain the flow compared to a functional component. We’ll use the following lifecycle methods to control rendering:
 
-*   `shouldComponentUpdate`: we’ll return `false` here and start the view transition-this will buy us some time for the screenshot capture to complete
-*   `forceUpdate`: to manually re-render the component after the screenshot capture
-*   `componentDidUpdate`: to notify the view transition API that the DOM has updated
+*   **`shouldComponentUpdate`**: we’ll return **`false`** here and start the view transition-this will buy us some time for the screenshot capture to complete
+*   **`forceUpdate`**: to manually re-render the component after the screenshot capture
+*   **`componentDidUpdate`**: to notify the view transition API that the DOM has updated
 
 Here’s how it looks:
 
@@ -152,7 +152,7 @@ export default class ViewTransition extends Component {
 
 **Note:** The [Next.js App Router](https://beta.nextjs.org/docs/app-directory-roadmap) is in beta at the time of writing and best-practices around it and the pages directory may be subject to change.
 
-To use this in a Next.js app, first we’ll disable React strict mode in development. Strict mode runs its checks by rendering the component twice. This interferes with the `ViewTransition` rendering flow in development so we’ll disable it globally and re-enable it for child components with the `StrictMode` component.
+To use this in a Next.js app, first we’ll disable React strict mode in development. Strict mode runs its checks by rendering the component twice. This interferes with the **`ViewTransition`** rendering flow in development so we’ll disable it globally and re-enable it for child components with the **`StrictMode`** component.
 
 ```
 // next.config.js
@@ -163,7 +163,7 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
-Next, in `pages/_app.js`, we’ll wrap `Component` in our `ViewTransition` and `StrictMode` component, and we should begin to see animated transitions:
+Next, in **`pages/_app.js`**, we’ll wrap **`Component`** in our **`ViewTransition`** and **`StrictMode`** component, and we should begin to see animated transitions:
 
 ```
 // pages/_app.js
@@ -184,7 +184,7 @@ export default function App({ Component, pageProps }) {
 
 View the [Next.js demonstration](https://frolicking-dusk-29be0a.netlify.app/), our [live Next.js demo](https://photography-view-transitions-nextjs.vercel.app/) and its [source](https://github.com/domchristie/photography-view-transitions-nextjs).
 
-**Note**: the React documentation advises against using `shouldComponentUpdate` and `forceUpdate`, stating they should only be used for performance optimizations, and that `shouldComponentUpdate` is not guaranteed to be called. As page animations are an enhancement, and this component will work even if `shouldComponentUpdate` is not called, I’m okay with this caveat.
+**Note**: the React documentation advises against using **`shouldComponentUpdate`** and **`forceUpdate`**, stating they should only be used for performance optimizations, and that **`shouldComponentUpdate`** is not guaranteed to be called. As page animations are an enhancement, and this component will work even if **`shouldComponentUpdate`** is not called, I’m okay with this caveat.
 
 ### An Alternative Approach without View Transitions
 
@@ -199,17 +199,17 @@ The main difference between this approach and that of the View Transitions API, 
 
 Both approaches are useful depending on the situation. For example, if there shared elements from one page to the next, you might opt for a view transition, whereas if the change is significant with few shared elements, you could benefit from the immediate feedback of an exit animation.
 
-To implement this, we’ll need to hook into routing events, which will depend on the framework or library you’re using. In particular, we’ll need to be notified when the user navigates. With Next.js, we can use the [`routeChangeStart` router event](https://nextjs.org/docs/api-reference/next/router#routerevents) to start the exit animations, but let’s look at how we might achieve this _without_ Next.js, React, or fully client-rendered HTML.
+To implement this, we’ll need to hook into routing events, which will depend on the framework or library you’re using. In particular, we’ll need to be notified when the user navigates. With Next.js, we can use the [**`routeChangeStart`** router event](https://nextjs.org/docs/api-reference/next/router#routerevents) to start the exit animations, but let’s look at how we might achieve this _without_ Next.js, React, or fully client-rendered HTML.
 
 ### Animating Server-side Rendered Multi-page Applications with Turbo and Turn
 
 **Note**: There are plans for the View Transition API to work for multi-page navigations, i.e. without JavaScript. However, the JavaScript API may still be needed for more advanced transitions.
 
-[Turbo](https://turbo.hotwired.dev/), part of the [Hotwire](https://hotwired.dev/) suite of libraries (not to be confused with [Vercel’s Turbo](https://turbo.build/)), offers a rendering approach that progressively enhances multi-page applications (MPAs). It aims to achieve SPA speeds without having to architect your code as a fully client-rendered application, and does so by capturing link clicks and form submissions, performing the request with JavaScript, and replacing the `<body>` with the new `<body>` from the response. In this way, it’s a hybrid approach: the HTML is generated on the server, but the DOM is updated via JavaScript.
+[Turbo](https://turbo.hotwired.dev/), part of the [Hotwire](https://hotwired.dev/) suite of libraries (not to be confused with [Vercel’s Turbo](https://turbo.build/)), offers a rendering approach that progressively enhances multi-page applications (MPAs). It aims to achieve SPA speeds without having to architect your code as a fully client-rendered application, and does so by capturing link clicks and form submissions, performing the request with JavaScript, and replacing the **`<body>`** with the new **`<body>`** from the response. In this way, it’s a hybrid approach: the HTML is generated on the server, but the DOM is updated via JavaScript.
 
-[Turn](https://github.com/domchristie/turn) is a library for animating page navigations using Turbo. It supports both animation approaches (although currently view transitions are experimental). Turn adds `turn-before-exit`, `turn-exit`, and `turn-enter` classes to the `<html>` element at the appropriate times, providing a way for developers to customize the animations.
+[Turn](https://github.com/domchristie/turn) is a library for animating page navigations using Turbo. It supports both animation approaches (although currently view transitions are experimental). Turn adds **`turn-before-exit`**, **`turn-exit`**, and **`turn-enter`** classes to the **`<html>`** element at the appropriate times, providing a way for developers to customize the animations.
 
-To get it working, add `data-turn-exit` and `data-turn-enter` attributes to the elements you wish to animate, then apply your CSS styles. For example, for a fade-in/fade-out:
+To get it working, add **`data-turn-exit`** and **`data-turn-enter`** attributes to the elements you wish to animate, then apply your CSS styles. For example, for a fade-in/fade-out:
 
 ```
 html.turn-exit [data-turn-exit] {
@@ -243,16 +243,16 @@ html.turn-enter [data-turn-enter] {
 }
 ```
 
-Then import the `Turn` library into your applications JavaScript an call `Turn.start()`.
+Then import the **`Turn`** library into your applications JavaScript an call **`Turn.start()`**.
 
 It works by hooking into Turbo’s rendering events, and controlling the flow as needed:
 
-1.  `turbo:visit`: just before the request starts, add the `turn-exit` class
-2.  `turbo:before-render`: after the request has completed but before the new HTML renders (similar to React’s `shouldComponentUpdate`), pause rendering to wait for any exit animations to complete
-3.  `turbo:render`: once the new HTML has been rendered, remove `turn-exit` class and add the `turn-enter` class
-4.  once the exit animations complete, remove the `turn-enter` class
+1.  **`turbo:visit`**: just before the request starts, add the **`turn-exit`** class
+2.  **`turbo:before-render`**: after the request has completed but before the new HTML renders (similar to React’s **`shouldComponentUpdate`**), pause rendering to wait for any exit animations to complete
+3.  **`turbo:render`**: once the new HTML has been rendered, remove **`turn-exit`** class and add the **`turn-enter`** class
+4.  once the exit animations complete, remove the **`turn-enter`** class
 
-Turn also has experimental support for view transitions, enabled by setting `Turn.config.experimental.viewTransitions = true`. This will use view transitions where supported, and fallback to the CSS animation approach. (Exploring how the approach can be switched on a case-by-case basis is a work-in-progress :)
+Turn also has experimental support for view transitions, enabled by setting **`Turn.config.experimental.viewTransitions = true`**. This will use view transitions where supported, and fallback to the CSS animation approach. (Exploring how the approach can be switched on a case-by-case basis is a work-in-progress :)
 
 ## Summary
 
