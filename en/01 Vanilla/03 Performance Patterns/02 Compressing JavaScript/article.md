@@ -35,9 +35,9 @@ Since you want all valid JS code on the browser, you should use lossless compres
 
 To reduce payload sizes, you can minify JavaScript before compression. [Minification](https://web.dev/reduce-network-payloads-using-text-compression/#minification) complements compression by removing whitespace and any unnecessary code to create a smaller but perfectly valid code file. When writing code, we use line breaks, indentation, spaces, well-named variables, and comments to improve code readability and maintainability. However, these elements contribute to the overall JavaScript size and are not necessary for execution on the browser. Minification reduces the JavaScript code to the minimum required for successful execution.
 
-Minification is a standard practice for JS and CSS optimization. It’s common for JavaScript library developers to provide minified versions of their files for production deployments, usually denoted with a min.js name extension. (e.g., `jquery.js` and `jquery.min.js`)
+Minification is a standard practice for JS and CSS optimization. It’s common for JavaScript library developers to provide minified versions of their files for production deployments, usually denoted with a min.js name extension. (e.g., **`jquery.js`** and **`jquery.min.js`**)
 
-Multiple tools are available for [the minification of HTML, CSS, and JS](https://developers.google.com/speed/docs/insights/MinifyResources) resources. [Terser](https://github.com/terser-js/terser) is a popular JavaScript compression tool for ES6+, and [Webpack](https://webpack.js.org/) v4 includes a plugin for this library by default to create minified build files. You can also use the `TerserWebpackPlugin` with older versions of Webpack or use Terser as a CLI tool without a module bundler.
+Multiple tools are available for [the minification of HTML, CSS, and JS](https://developers.google.com/speed/docs/insights/MinifyResources) resources. [Terser](https://github.com/terser-js/terser) is a popular JavaScript compression tool for ES6+, and [Webpack](https://webpack.js.org/) v4 includes a plugin for this library by default to create minified build files. You can also use the **`TerserWebpackPlugin`** with older versions of Webpack or use Terser as a CLI tool without a module bundler.
 
 - - -
 
@@ -111,11 +111,11 @@ module.exports = {
 
 Next.js provides [Gzip compression by default](https://nextjs.org/docs/api-reference/next.config.js/compression) but recommends enabling it on an HTTP proxy like Nginx. Both Gzip and Brotli are supported on the [Vercel platform](https://vercel.com/docs/concepts/edge-network/compression) at the proxy level.
 
-You can enable dynamic lossless compression on servers (including Node.js) that support different compression algorithms. The browser communicates the compression algorithms it supports through the [Accept-Encoding](https://developer.mozilla.org/docs/Web/HTTP/Headers/Accept-Encoding) HTTP header in the request. For example, `Accept-Encoding: gzip, br`.
+You can enable dynamic lossless compression on servers (including Node.js) that support different compression algorithms. The browser communicates the compression algorithms it supports through the [Accept-Encoding](https://developer.mozilla.org/docs/Web/HTTP/Headers/Accept-Encoding) HTTP header in the request. For example, **`Accept-Encoding: gzip, br`**.
 
 This indicates that the browser supports Gzip and Brotli. You can enable different types of compression on your server by following instructions for the specific server type. For example, you can find instructions for enabling Brotli on the Apache server [here](https://httpd.apache.org/docs/2.4/mod/mod_brotli.html#enable). [Express](https://expressjs.com/) is a popular web framework for Node and provides a [compression](https://github.com/expressjs/compression) middleware library. Use it to compress any asset as it gets requested.
 
-Brotli is recommended over other compression algorithms because it generates smaller file sizes. You can enable Gzip as a fallback for browsers that don’t support Brotli. If successfully configured, the server will return the [Content-Encoding](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Encoding) HTTP response header to indicate the compression algorithm used in the response. E.g., `Content-Encoding: br`.
+Brotli is recommended over other compression algorithms because it generates smaller file sizes. You can enable Gzip as a fallback for browsers that don’t support Brotli. If successfully configured, the server will return the [Content-Encoding](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Encoding) HTTP response header to indicate the compression algorithm used in the response. E.g., **`Content-Encoding: br`**.
 
 - - -
 
@@ -170,7 +170,7 @@ In an ideal world, the granularity and chunking strategy should aim to achieve t
 
 1.  **Improve download speed:** As seen in the previous sections, download speeds can be improved using compression. However, compressing one large chunk will yield a better result or smaller file size than compressing multiple small chunks with the same code.
 
-`compress(a + b) <= compress(a) + compress(b)`
+**`compress(a + b) <= compress(a) + compress(b)`**
 
 > ***"Limited local data suggests a 5% to 10% loss for smaller chunks. The extreme case of unbundled chunks shows a 20% increase in size. Additional IPC, I/O, and processing costs are attached to each chunk that gets shared in the case of larger chunks. The v8 engine has a 30K streaming/parsing threshold. This means that all chunks smaller than 30K will parse on the critical loading path even if it is non-critical."***
 
@@ -185,10 +185,10 @@ In an ideal world, the granularity and chunking strategy should aim to achieve t
     Thus, smaller chunks are desirable to utilize the caching mechanism.
     
 
-1.  \*\*Execute fast \*\*- For code to execute fast, it should satisfy the following.
+1.  **Execute fast **- For code to execute fast, it should satisfy the following.
 
 *   All required dependencies are readily available - they have been downloaded together or are available in the cache. This would mean you should bundle all related code together as a larger chunk.
-*   Only the code needed by the page/route should execute. This requires that no extra code is downloaded or executed. A `commons` chunk that includes common dependencies may have dependencies required by most but not all pages. De-duplication of code requires smaller independent chunks.
+*   Only the code needed by the page/route should execute. This requires that no extra code is downloaded or executed. A **`commons`** chunk that includes common dependencies may have dependencies required by most but not all pages. De-duplication of code requires smaller independent chunks.
 *   Long tasks on the main thread can block it for a long time. As such, these need to be broken up into smaller chunks.
 
 <img src="../../../imgs/03PerformancePatterns/01 Compressing JavaScript/06.png">
@@ -213,7 +213,7 @@ A potential solution for the granularity trade-off would address the following r
 
 A potential solution that addresses these requirements is still in the works. However, Webpack v4’s [SplitChunksPlugin](https://webpack.js.org/plugins/split-chunks-plugin/) and a granular chunking strategy can help increase the loading granularity to some extent.
 
-Earlier versions of Webpack used the `CommonsChunkPlugin` for bundling common dependencies or shared modules into a single chunk. This could lead to an unnecessary increase in the download and execution times for pages that did not use these common modules. To allow for better optimization for such pages, Webpack introduced the `SplitChunksPlugin` in v4. Multiple split chunks are created based on defaults or configuration to prevent fetching duplicated code across various routes.
+Earlier versions of Webpack used the **`CommonsChunkPlugin`** for bundling common dependencies or shared modules into a single chunk. This could lead to an unnecessary increase in the download and execution times for pages that did not use these common modules. To allow for better optimization for such pages, Webpack introduced the **`SplitChunksPlugin`** in v4. Multiple split chunks are created based on defaults or configuration to prevent fetching duplicated code across various routes.
 
 Next.js adopted the SplitChunksPlugin and implemented the following [Granular Chunking](https://web.dev/granular-chunking-nextjs/) strategy to generate Webpack chunks that address the granularity trade-off.
 
